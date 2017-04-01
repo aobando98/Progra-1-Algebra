@@ -140,5 +140,11 @@ public class Fraccion {
             denominador /= MCD;
         }
     }
+    
+    //inversa de una fraccion 
+    
+    public Fraccion inversa(){
+    	return new Fraccion(this.denominador, this.numerador);
+    }
 
 }

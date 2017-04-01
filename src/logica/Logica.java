@@ -2,6 +2,14 @@ package logica;
 
 public class Logica {
 	
+	private Matriz M1;
+	
+	//Constructor
+	
+	public Logica(Matriz pMatriz){
+		this.M1 = pMatriz;
+	}
+	
 	/**
 	 * El objetivo de la funcion es cambiar la fila de una matriz por otra fila de la misma
 	 * @param pMatriz = matriz por cambiar
@@ -116,14 +124,32 @@ public class Logica {
         Fraccion mult= new Fraccion(-1,1);
         Fraccion cons=new Fraccion(-1,1);
         Fraccion det=new Fraccion(0,1);
+        
         while(pMatriz.getFilas()>2){
-            for(int i=0;i<pMatriz.getFilas();i++){
-                mult=mult.Multiplicacion(mult,cons);
-                det=det.suma(det, det.Multiplicacion(mult, det.Multiplicacion(pMatriz.getValor(i,0),determinante(Elimina(pMatriz,i,0)))));
+            for(int j=0;j<pMatriz.getColumnas();j++){
+                mult = mult.Multiplicacion(mult,cons);
+                det = det.suma(det, det.Multiplicacion(mult, det.Multiplicacion(pMatriz.getValor(0,j),determinante(Elimina(pMatriz,0,j)))));
             }
             return det;
         }
         return det.resta(det.Multiplicacion(pMatriz.getValor(0,0), pMatriz.getValor(1,1)),det.Multiplicacion(pMatriz.getValor(0,1), pMatriz.getValor(1,0)));
+    }
+	
+	public Matriz cofactores(Matriz pMatriz){
+        Matriz Resultado=new Matriz(pMatriz.getFilas(),pMatriz.getColumnas());
+        Fraccion cons=new Fraccion(-1,1);
+        Fraccion mult= new Fraccion(-1,1);
+        for(int i=0;i<pMatriz.getFilas();i++){
+            for(int j=0;j<pMatriz.getColumnas();j++){
+                Matriz tmp= new Matriz(pMatriz.getFilas()-1,pMatriz.getColumnas()-1);
+                tmp = tmp.Elimina(pMatriz, i, j);
+                Fraccion nuevo=new Fraccion(1,1);
+                nuevo=nuevo.Multiplicacion(mult, tmp.determinante(tmp, 0));
+                Resultado.setValor(i, j, nuevo);
+                mult=cons.Multiplicacion(mult, cons);
+            }
+        }
+        return Resultado;
     }
 
 }
