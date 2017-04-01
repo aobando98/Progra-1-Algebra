@@ -55,6 +55,61 @@ public class Matriz {
     }
 
     
+    //Operaciones sobre filas
+    
+    /**
+     * Intercambio de una fila por otra
+     * @param pMatriz
+     * @param pFila
+     * @param otra
+     * @return La matriz con las filas cambiadas
+     */
+    public Matriz Intercambia(Matriz pMatriz,int pFila, int otra){
+        Matriz nueva= new Matriz(pMatriz.getFilas(),pMatriz.getFilas());
+        pFila -= 1;
+        otra -= 1;
+        Fraccion tmp= new Fraccion(1,1);
+        for(int i=0;i<pMatriz.getFilas();i++){
+            for(int j=0;j<pMatriz.getColumnas();j++){
+                if(i==pFila){
+                   tmp=pMatriz.getValor(i, j);
+                   nueva.setValor(otra, j, tmp);     
+                }else if(i==otra){
+                   tmp=pMatriz.getValor(i, j);
+                   nueva.setValor(pFila, j, tmp);
+                }else{
+                    tmp=pMatriz.getValor(i,j);
+                    nueva.setValor(i, j, tmp);
+                }
+            }
+        }
+        return nueva;
+    }
+    
+    /**
+     * Multiplicacion de una fila por un escalar mas otra fila
+     * @param pMatriz
+     * @param escalar
+     * @param pfila
+     * @param destino
+     * @return
+     */
+    public Matriz EscFaF(Matriz pMatriz,Fraccion escalar, int pfila, int destino){
+        pfila -= 1;
+        destino -= 1;
+        for(int i=0;i<pMatriz.getFilas(); i++){
+            for(int j=0; j<pMatriz.getColumnas(); j++){
+                if(pfila==i){
+                    Fraccion tmp= new Fraccion(1,1);
+                    tmp=tmp.Multiplicacion(pMatriz.getValor(i,j),escalar);
+                    tmp=pMatriz.getValor(destino,j);
+                    pMatriz.setValor(destino,j,tmp);
+                }
+            }
+        }
+        return pMatriz;
+    }
+    
     //Otras Funciones
     
     public Matriz Elimina(Matriz pMatriz, int pFila, int pColumna){
@@ -161,6 +216,78 @@ public class Matriz {
     	
     	return adjunta;
     }
+    
+    public Matriz Multiplicacion(Matriz pMatrizA, Matriz pMatrizB){
+		Matriz result = null;
+		
+		if (pMatrizA.getColumnas() != pMatrizB.getFilas()){
+			System.out.println("No se puede efectuar la multiplicacion");
+			return result;
+		}else{
+			Matriz Resultado = new Matriz(pMatrizA.getFilas(), pMatrizB.getColumnas());
+			for (int i = 0; i < pMatrizA.getFilas(); i++){
+				for (int j = 0; j < pMatrizB.getColumnas(); j++){
+					Fraccion valor = new Fraccion();
+					for (int k =1; k <= pMatrizA.getColumnas(); k++){
+						Fraccion temp = new Fraccion();
+						temp = temp.Multiplicacion(pMatrizA.getValor(i, k), pMatrizB.getValor(k, i));
+						valor = valor.suma(valor, temp);
+					}
+					Resultado.setValor(i, j, valor);
+				}
+			}
+			result = Resultado;
+		}
+		
+		return result;
+	}
+	
+	public Matriz Resta(Matriz pMatrizA, Matriz pMatrizB){
+		
+		if (pMatrizA.getFilas() != pMatrizB.getFilas() || pMatrizA.getColumnas() != pMatrizB.getColumnas()){
+			return null;
+			
+		}else{
+			Matriz Resultado = new Matriz(pMatrizA.getFilas(), pMatrizA.getColumnas());
+			for (int i = 0; i < pMatrizA.getFilas(); i++){
+				for (int j = 0; j < pMatrizB.getColumnas(); j++){
+					Fraccion valor = new Fraccion();
+					valor = valor.resta_in(pMatrizA.getValor(i, j), pMatrizB.getValor(i, j));
+					Resultado.setValor(i, j, valor);
+				}
+			}
+			return Resultado;
+		}
+	}
+	
+	public Matriz Suma(Matriz pMatrizA, Matriz pMatrizB){
+			
+			if (pMatrizA.getFilas() != pMatrizB.getFilas() || pMatrizA.getColumnas() != pMatrizB.getColumnas()){
+				return null;
+				
+			}else{
+				Matriz Resultado = new Matriz(pMatrizA.getFilas(), pMatrizA.getColumnas());
+				for (int i = 0; i < pMatrizA.getFilas(); i++){
+					for (int j = 0; j < pMatrizB.getColumnas(); j++){
+						Fraccion valor = new Fraccion();
+						valor = valor.suma(pMatrizA.getValor(i, j), pMatrizB.getValor(i, j));
+						Resultado.setValor(i, j, valor);
+					}
+				}
+				return Resultado;
+			}
+		}
+	
+	public Matriz Despejar(Matriz pMatrizA, Matriz pMatrizB, Matriz pMatrizC){
+		Matriz MatrizX = new Matriz(pMatrizA.getFilas(), pMatrizA.getColumnas());
+		
+		Matriz InversaA = pMatrizA.inversa();
+		Matriz C_B = pMatrizC.Resta(pMatrizC, pMatrizB);
+		
+		MatrizX = InversaA.Multiplicacion(InversaA, C_B);
+		
+		return MatrizX;
+	}
     	
 	
 

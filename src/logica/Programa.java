@@ -29,15 +29,13 @@ public class Programa {
 		
 		f5 = l1.determinante(m1);
 		
-		//m1.MultiplicarEscalar(f1);
-		System.out.println(m1.determinante(m1, 0).get_numerador() + "/" + m1.determinante(m1, 0).get_denominador());
-		m1 = m1.inversa();
+		m1 = m1.EscFaF(m1, f1, 1, 2);
+		//m1 = m1.inversa();
 		
 		m1.imprime_matriz();
 		
 		
-		System.out.println(f5.get_numerador());
-		System.out.println(f5.get_denominador());
+		
 
 	}
 
