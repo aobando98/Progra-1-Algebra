@@ -53,6 +53,12 @@ public class Fraccion {
     
     //Suma
     
+    /**
+     * Funcion para sumar dos fracciones
+     * @param A	Fraccion numero 1
+     * @param B	Fraccion numero 2
+     * @return	Resultado de la suma de fracciones
+     */
     public Fraccion suma(Fraccion A, Fraccion B){
         int dA=A.get_denominador();
         int dB=B.get_denominador();
@@ -69,6 +75,12 @@ public class Fraccion {
     
     //Resta
     
+    /**
+     * Funcion para restar dos fracciones
+     * @param A	Fraccion numero 1
+     * @param B	Fraccion numero 2
+     * @return	Resultado de la resta de 2 fracciones
+     */
     public Fraccion resta_in(Fraccion A, Fraccion B){
         int dA=A.get_denominador();
         int dB=B.get_denominador();
@@ -99,6 +111,12 @@ public class Fraccion {
     
     //Multiplicacion
     
+    /**
+     * Funcion para multiplicar dos fracciones
+     * @param A	Fraccion numero 1
+     * @param B	Fraccion numero 2
+     * @return	Resultado de multiplicar las dos fracciones
+     */
     public Fraccion Multiplicacion(Fraccion A, Fraccion B){
     	int dA=A.get_denominador();
         int dB=B.get_denominador();
@@ -115,6 +133,9 @@ public class Fraccion {
     
     //Simplificacion
     
+    /**
+     * Funcion que trabaja sobre la misma fraccion y la simplifica si es posible
+     */
     private void reduce() {
         int n = numerador, d = denominador, largest;
         if (numerador < 0) {
@@ -143,6 +164,10 @@ public class Fraccion {
     
     //inversa de una fraccion 
     
+    /**
+     * Trabaja sobre la misma fraccion y genera el inverso de esta
+     * @return	inverso de la fraccion
+     */
     public Fraccion inversa(){
     	return new Fraccion(this.denominador, this.numerador);
     }
