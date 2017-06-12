@@ -288,6 +288,162 @@ public class Matriz {
 		
 		return MatrizX;
 	}
+
+	//Funciones Extra Para la Progra de Arqui
+	public boolean matrizFila(Matriz pMatriz){
+		boolean result = false;
+
+		if (pMatriz.getFilas == 1){
+			result = true;
+			return result;
+		}
+
+		return result;
+	}
+
+	public boolean matrizColumna(Matriz pMatriz){
+		boolean result = false;
+
+		if (pMatriz.getColumnas == 0){
+			result = true;
+			return result;
+		}
+
+		return result;
+	}
+
+	public boolean matrizRectangular(Matriz pMatriz){
+		boolean result = false;
+
+		if (pMatriz.getColumnas != pMatriz.getFilas){
+			result = true;
+			return result;
+		}
+
+		return result;
+	}
+
+	public boolean matrizCuadrada(Matriz pMatriz){
+		boolean result = false;
+
+		if (pMatriz.getColumnas == pMatriz.getFilas){
+			result = true;
+			return result;
+		}
+	}
+
+	public boolean matrizNula(Matriz pMatriz){
+		boolean result = false
+
+		for (int i = 0; i < pMatrizA.getFilas(); i++){
+			for (int j = 0; j < pMatrizB.getColumnas(); j++){
+				if (pMatriz.getValor(i, j) != 0){
+					return result;
+				}
+			}
+		}
+		result = true;
+		return result;
+	}
+
+	public boolean matrizEscalar(Matriz pMatriz){
+		boolean result = false
+
+		int valorDiagonal = pMatriz.getValor(0, 0);
+		for (int i = 0; i < pMatrizA.getFilas(); i++){
+			for (int j = 0; j < pMatrizB.getColumnas(); j++){
+				if (i == j){
+					if (pMatriz.getValor(i, j) == valorDiagonal){
+						result = true;
+					}else{
+						result = false;
+					}
+				}else{
+					if (pMatriz.getValor != 0){
+						result = false;
+						return result;
+					}else{
+						result = true;
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	public boolean matrizIdentidad(Matriz pMatriz){
+		boolean result = false
+
+		for (int i = 0; i < pMatrizA.getFilas(); i++){
+			for (int j = 0; j < pMatrizB.getColumnas(); j++){
+				if (i == j){
+					if (pMatriz.getValor(i, j) == 1){
+						result = true;
+					}else{
+						result = false;
+					}
+				}else{
+					if (pMatriz.getValor != 0){
+						result = false;
+						return result;
+					}else{
+						result = true;
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	//Revisar
+	public boolean matrizTriangularSuperior(Matriz pMatriz){
+		boolean result = false;
+
+		for (int i = 0; i < pMatrizA.getFilas(); i++){
+			for (int j = 0; j < pMatrizB.getColumnas(); j++){
+				if (i > j){
+					if (pMatriz.getValor(i, j) == 0){
+						result = true;
+					}else{
+						result = false;
+					}
+				}else{
+					if (pMatriz.getValor != 0){
+						result = true;;
+						return result;
+					}else{
+						result = false;
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	//Revisar
+	public boolean matrizTriangularInferior(Matriz pMatriz){
+		boolean result = false;
+
+		for (int i = 0; i < pMatrizA.getFilas(); i++){
+			for (int j = 0; j < pMatrizB.getColumnas(); j++){
+				if (i < j){
+					if (pMatriz.getValor(i, j) == 0){
+						result = true;
+					}else{
+						result = false;
+					}
+				}else{
+					if (pMatriz.getValor != 0){
+						result = true;;
+						return result;
+					}else{
+						result = false;
+					}
+				}
+			}
+		}
+		return result;
+	}
     	
 	
 
